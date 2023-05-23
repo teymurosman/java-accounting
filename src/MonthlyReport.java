@@ -45,23 +45,19 @@ public class MonthlyReport {
         System.out.println("Самая большая трата: " + maxExpItem + ". Расход по ней составил: " + maxExpense);
     }
 
-    int findMonthExpense(int m) {
-        int totalExpense = 0;
+    int findMonthTotal(int m, boolean isExpense) { // Объединил 2 метода в 1, добавив аргумент isExpense
+        int total = 0;
         for (ItemsOfMonth month : itemsOfMonths.get(m)) {
-            if (month.isExpense) {
-                totalExpense += month.price * month.quantity;
+            if (isExpense) {
+                if (month.isExpense) {
+                    total += month.price * month.quantity;
+                }
+            } else {
+                if (!month.isExpense) {
+                    total += month.price * month.quantity;
+                }
             }
         }
-        return totalExpense;
-    }
-
-    int findMonthIncome(int m) {
-        int totalIncome = 0;
-        for (ItemsOfMonth month : itemsOfMonths.get(m)) {
-            if (!month.isExpense) {
-                totalIncome += month.price * month.quantity;
-            }
-        }
-        return totalIncome;
+        return total;
     }
 }

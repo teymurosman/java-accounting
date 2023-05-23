@@ -3,7 +3,7 @@ import java.util.HashMap;
 public class YearlyReport {
     HashMap<Integer, MonthOfYear> yearOfMonths = new HashMap<>();
 
-    public YearlyReport(String path) {
+    public void loadFile(String path) { // Считывание через метод, а не конструктор
         String content = FileReader.readFileContentsOrNull(path);
         if (content == null) {
             return;

@@ -7,7 +7,7 @@ public class Main {
 
         int numOfMonths = 3;
         MonthlyReport monthlyReport = new MonthlyReport();
-        YearlyReport yearlyReport = null;
+        YearlyReport yearlyReport = new YearlyReport();
 
         while (true) {
             printMenu();
@@ -18,10 +18,10 @@ public class Main {
                 }
                 System.out.println("Месячные отчёты успешно считаны");
             } else if (userInput == 2) {
-                yearlyReport = new YearlyReport("resources/y.2021.csv"); // Считываем годовой отчёт через конструктор
+                yearlyReport.loadFile("resources/y.2021.csv"); // Считываем годовой отчёт
                 System.out.println("Годовой отчёт успешно считан");
             } else if (userInput == 3) {
-                if (monthlyReport.itemsOfMonths.isEmpty() || yearlyReport == null) {
+                if (monthlyReport.itemsOfMonths.isEmpty() || yearlyReport.yearOfMonths.isEmpty()) {
                     System.out.println("Необходимо сначала считать месячные и годовой отчёты");
                 } else {
                     Checker.findMistake(numOfMonths, monthlyReport, yearlyReport); // Сверка отчетов
@@ -36,7 +36,7 @@ public class Main {
                     }
                 }
             } else if (userInput == 5) {
-                if (yearlyReport == null) {
+                if (yearlyReport.yearOfMonths.isEmpty()) { // Проверка такая же, как для месячного
                     System.out.println("Необходимо сначала считать годовой отчёт");
                 } else {
                     System.out.println("Рассматриваемый год: 2021");
